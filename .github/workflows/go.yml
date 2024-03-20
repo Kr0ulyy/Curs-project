@@ -20,9 +20,9 @@ jobs:
       with:
         context: ./go/
         file: ./go/Dockerfile
-        tags: kr0ulyy/curs_project:latest
+        tags: cursproject:latest
         push: false
 
     - name: Run Docker container
       run: |
-        docker run -d --name goproject -p 8888:8888 kr0ulyy/curs_project:latest
+        docker run -d --name goproject -p 8888:8888 cursproject:latest
