@@ -25,4 +25,4 @@ jobs:
 
     - name: Run Docker container
       run: |
-        docker run -d --name goproject -p 8888:8888 cursproject:latest
+        docker run -d -p 8888:8888 cursproject:latest
