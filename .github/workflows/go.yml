@@ -21,7 +21,7 @@ jobs:
       with:
         context: ./go/
         file: ./go/Dockerfile
-        tags: cursproject:latest
+        tags: curs_project:latest
         load: true
         
   deploy:
@@ -31,7 +31,7 @@ jobs:
       - name: Preparation and cleanup for deploy
         run: |
           docker rm -f $(docker ps -a -q) || echo "No containers available for cleaning"
-          docker run -d --name go-curs -p 8888:8888 cursproject:latest
+          docker run -d --name go-curs -p 8888:8888 curs_project:latest
         
   push:
     needs: deploy
