@@ -30,7 +30,7 @@ jobs:
     steps:
       - name: Remove all existing containers
         run: |
-          FOR /f "tokens=*" %i IN ('docker ps -aq') DO docker rm -f %i
+          FOR /f "tokens=*" %%i IN ('docker ps -aq') DO docker rm -f %%i
         shell: cmd
 
       - name: Run new Docker container
