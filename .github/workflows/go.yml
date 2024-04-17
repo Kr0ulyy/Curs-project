@@ -28,14 +28,11 @@ jobs:
     needs: build
     runs-on: [self-hosted]
     steps:
-      - name: Remove all existing containers
-        run: |
-          FOR /f "tokens=*" %%i IN ('docker ps -aq') DO docker rm -f %%i
-        shell: cmd
+      - name: Preparation and cleanup for deploy
+        run:  docker rm -f $(docker ps -a -q) || echo "No containers available for cleaning"
 
       - name: Run new Docker container
         run: docker run -d --name go-curs -p 8888:8888 cursproject:latest
-        shell: cmd
         
   push:
     needs: deploy
