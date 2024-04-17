@@ -10,19 +10,12 @@ jobs:
   build:
     runs-on: self-hosted
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v1
-
-    - name: Build Docker image
-      uses: docker/build-push-action@v2
-      with:
-        context: ./go/
-        file: ./go/Dockerfile
-        tags: curs_project:latest
-        load: true
+      - name: Build Docker Image
+        run: docker build -t kr0ulyy/curs_project:latest go/. && docker image prune -f
+      
         
   deploy:
     needs: build
@@ -31,7 +24,7 @@ jobs:
       - name: Preparation and cleanup for deploy
         run: |
           docker rm -f $(docker ps -a -q) || echo "No containers available for cleaning"
-          docker run -d --name go-curs -p 8888:8888 curs_project:latest
+          docker run -d --name go-curs -p 8888:8888 kr0ulyy/curs_project:latest
         
   push:
     needs: deploy
