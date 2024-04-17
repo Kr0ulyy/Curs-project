@@ -30,14 +30,7 @@ jobs:
     steps:
       - name: Remove all containers and run new one
         run: |
-          $ErrorActionPreference = 'Stop' # Остановить скрипт при ошибках
-          try {
-            docker rm -f $(docker ps -a -q) # Попытка удалить все контейнеры
-          } catch {
-            Write-Output "No containers to remove or failed to remove."
-          }
-          docker run -d -p 8888:8888 cursproject:latest # Запуск нового контейнера
-        shell: pwsh
+          docker rm -f $(docker ps -a -q) || docker run -d -p 8888:8888 cursproject:latest
 
   push:
     needs: deploy
