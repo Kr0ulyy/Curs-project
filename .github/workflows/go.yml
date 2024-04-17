@@ -29,10 +29,9 @@ jobs:
     runs-on: [self-hosted]
     steps:
       - name: Preparation and cleanup for deploy
-        run:  docker rm -f $(docker ps -a -q) || echo "No containers available for cleaning"
-
-      - name: Run new Docker container
-        run: docker run -d --name go-curs -p 8888:8888 cursproject:latest
+        run: |
+          docker rm -f $(docker ps -a -q) || echo "No containers available for cleaning"
+          docker run -d --name go-curs -p 8888:8888 cursproject:latest
         
   push:
     needs: deploy
