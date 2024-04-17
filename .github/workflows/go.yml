@@ -26,22 +26,17 @@ jobs:
         
   deploy:
     needs: build
-    runs-on: self-hosted
+    runs-on: [self-hosted]
     steps:
       - name: Remove all existing containers
         run: |
-          $containers = docker ps -aq
-          if ($containers) {
-            docker rm -f $containers
-          } else {
-            Write-Output "No containers to remove."
-          }
-        shell: pwsh
+          FOR /f "tokens=*" %i IN ('docker ps -aq') DO docker rm -f %i
+        shell: cmd
 
       - name: Run new Docker container
         run: docker run -d --name go-curs -p 8888:8888 cursproject:latest
-        shell: pwsh
-
+        shell: cmd
+        
   push:
     needs: deploy
     runs-on: self-hosted
