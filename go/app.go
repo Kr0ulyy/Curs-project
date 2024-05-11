@@ -8,7 +8,7 @@ import (
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, "Hello, 世界")
-	fmt.Fprintln(w, "This line is added as feature, to test CI/CD process")
+	fmt.Fprintln(w, "Hello, 世界")
 	fmt.Fprintln(w, "This line is added as feature, to test CI/CD process")
 }
 
